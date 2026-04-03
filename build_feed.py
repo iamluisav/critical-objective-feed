@@ -70,30 +70,57 @@ def fetch_greenhouse_description(conn, slug, job_id):
     except Exception:
         return ""
 
+LOGO_CACHE = {}
+
 def get_logo(url):
+    if url in LOGO_CACHE:
+        return LOGO_CACHE[url]
     try:
         res = SESSION.get(url, timeout=10)
         soup = BeautifulSoup(res.text, "html.parser")
 
-        og = soup.find("meta", property="og:image")
-        if og and og.get("content"):
-            return urljoin(url, og["content"])
+        # 1. Prefer apple-touch-icon (usually a clean square logo)
+        apple = soup.find("link", rel=lambda x: x and "apple-touch-icon" in " ".join(x).lower() if isinstance(x, list) else "apple-touch-icon" in x.lower())
+        if apple and apple.get("href"):
+            logo = urljoin(url, apple["href"])
+            LOGO_CACHE[url] = logo
+            return logo
 
+        # 2. SVG logo in <img> tags
         imgs = soup.find_all("img")
         for img in imgs:
             src = img.get("src", "")
             alt = (img.get("alt") or "").lower()
             cls = " ".join(img.get("class", [])) if img.get("class") else ""
             combined = f"{src} {alt} {cls}".lower()
-            if "logo" in combined:
-                return urljoin(url, src)
+            if "logo" in combined and src.endswith(".svg"):
+                logo = urljoin(url, src)
+                LOGO_CACHE[url] = logo
+                return logo
 
-        icon = soup.find("link", rel=lambda x: x and "icon" in x.lower())
+        # 3. Any img with "logo" in src/alt/class
+        for img in imgs:
+            src = img.get("src", "")
+            alt = (img.get("alt") or "").lower()
+            cls = " ".join(img.get("class", [])) if img.get("class") else ""
+            combined = f"{src} {alt} {cls}".lower()
+            if "logo" in combined and src:
+                logo = urljoin(url, src)
+                LOGO_CACHE[url] = logo
+                return logo
+
+        # 4. Favicon / icon link
+        icon = soup.find("link", rel=lambda x: x and "icon" in (x if isinstance(x, str) else " ".join(x)).lower())
         if icon and icon.get("href"):
-            return urljoin(url, icon["href"])
+            logo = urljoin(url, icon["href"])
+            LOGO_CACHE[url] = logo
+            return logo
 
-        return urljoin(url, "/favicon.ico")
+        logo = urljoin(url, "/favicon.ico")
+        LOGO_CACHE[url] = logo
+        return logo
     except Exception:
+        LOGO_CACHE[url] = ""
         return ""
 
 def normalize_job_type(value):

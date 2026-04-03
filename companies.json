@@ -778,5 +778,35 @@
     "company_url": "https://www.osmo.ai",
     "source_type": "ashby",
     "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/osmo"
+  },
+  {
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/aeva",
+    "company_name": "Aeva",
+    "company_url": "https://www.aeva.ai"
+  },
+  {
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/scaleai/jobs",
+    "company_name": "Scale AI",
+    "company_url": "https://www.scale.com"
+  },
+  {
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/planetlabs/jobs",
+    "company_name": "Planet Labs",
+    "company_url": "https://www.planet.com"
+  },
+  {
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/nuro/jobs",
+    "company_name": "Nuro",
+    "company_url": "https://www.nuro.ai"
+  },
+  {
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/pivotbio/jobs",
+    "company_name": "Pivot Bio",
+    "company_url": "https://www.pivotbio.com"
   }
 ]
