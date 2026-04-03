@@ -164,6 +164,47 @@ def parse_ashby(company):
 
     return jobs
 
+def parse_greenhouse(company):
+    jobs = []
+    res = requests.get(company["feed_url"], timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+    res.raise_for_status()
+
+    data = res.json()
+    logo_url = get_logo(company["company_url"])
+
+    for post in data.get("jobs", []):
+        location = post.get("location", {}).get("name", "") or ""
+
+        metadata = {m["name"]: m["value"] for m in post.get("metadata", []) or []}
+        employment_type = metadata.get("Employment Type", "") or ""
+        workplace_type = metadata.get("Workplace Type", "") or ""
+
+        updated_at = post.get("updated_at", "")
+        try:
+            published = updated_at[:10] if updated_at else datetime.now().strftime("%Y-%m-%d")
+        except Exception:
+            published = datetime.now().strftime("%Y-%m-%d")
+
+        apply_url = post.get("absolute_url", "")
+
+        jobs.append({
+            "job_id": str(post.get("id", "")),
+            "job_title": post.get("title", ""),
+            "description": "",
+            "company_name": company["company_name"],
+            "company_url": company["company_url"],
+            "company_logo_url": logo_url,
+            "application_link": apply_url,
+            "publish_date": published,
+            "job_type": normalize_job_type(employment_type),
+            "location": location,
+            "location_type": normalize_location_type(workplace_type, location),
+            "department": post.get("departments", [{}])[0].get("name", "") if post.get("departments") else "",
+            "job_url": apply_url
+        })
+
+    return jobs
+
 def build_csv(jobs):
     import csv
     with open("feed.csv", "w", newline="", encoding="utf-8") as f:
@@ -224,6 +265,8 @@ def main():
                 jobs = parse_lever(company)
             elif company["source_type"] == "ashby":
                 jobs = parse_ashby(company)
+            elif company["source_type"] == "greenhouse":
+                jobs = parse_greenhouse(company)
             else:
                 print(f"Skipping unsupported source_type: {company['source_type']}")
                 continue

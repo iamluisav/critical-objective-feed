@@ -10,5 +10,707 @@
     "company_url": "https://shield.ai",
     "source_type": "lever",
     "feed_url": "https://api.lever.co/v0/postings/shieldai"
+  },
+  {
+    "company_name": "North Slope Technologies",
+    "company_url": "https://www.northslope.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/northslope-technologies"
+  },
+  {
+    "company_name": "Mariana Minerals",
+    "company_url": "https://www.marianaminerals.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/marianaminerals"
+  },
+  {
+    "company_name": "Union Tech",
+    "company_url": "https://www.union.tech",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/union-tech"
+  },
+  {
+    "company_name": "Merlin Labs",
+    "company_url": "https://www.merlinlabs.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/merlinlabs"
+  },
+  {
+    "company_name": "Hermeus",
+    "company_url": "https://www.hermeus.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/hermeus"
+  },
+  {
+    "company_name": "Albedo",
+    "company_url": "https://albedo.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/albedo"
+  },
+  {
+    "company_name": "Machina Labs",
+    "company_url": "https://www.machinalabs.ai",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/MachinaLabs"
+  },
+  {
+    "company_name": "Odys Aviation",
+    "company_url": "https://www.odysaviation.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/odys-aviation"
+  },
+  {
+    "company_name": "Mach Industries",
+    "company_url": "https://machindustries.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/mach"
+  },
+  {
+    "company_name": "Airspace Intelligence",
+    "company_url": "https://www.airspace-intelligence.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/airspace-intelligence.com"
+  },
+  {
+    "company_name": "OpenAI",
+    "company_url": "https://www.openai.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/openai"
+  },
+  {
+    "company_name": "Solestial",
+    "company_url": "https://www.solestial.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/solestial"
+  },
+  {
+    "company_name": "Palantir",
+    "company_url": "https://www.palantir.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/palantir"
+  },
+  {
+    "company_name": "Northwood Space",
+    "company_url": "https://www.northwoodspace.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/northwoodspace"
+  },
+  {
+    "company_name": "Picogrid",
+    "company_url": "https://www.picogrid.io",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/picogrid"
+  },
+  {
+    "company_name": "Make Rain",
+    "company_url": "https://www.rainmaker.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/make-rain"
+  },
+  {
+    "company_name": "Zanskar",
+    "company_url": "https://www.zanskar.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/Zanskar"
+  },
+  {
+    "company_name": "Xona Space Systems",
+    "company_url": "https://www.xonaspace.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/xona-space"
+  },
+  {
+    "company_name": "Astro Mechanica",
+    "company_url": "https://www.astromecha.co",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/Astro-Mechanica"
+  },
+  {
+    "company_name": "Bedrock Energy",
+    "company_url": "https://www.bedrockenergy.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/bedrockenergy"
+  },
+  {
+    "company_name": "Bedrock Ocean",
+    "company_url": "https://www.bedrockocean.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/bedrockocean"
+  },
+  {
+    "company_name": "Atomic Semi",
+    "company_url": "https://atomicsemi.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/AtomicSemi"
+  },
+  {
+    "company_name": "Brimstone",
+    "company_url": "https://www.brimstone.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/brimstone"
+  },
+  {
+    "company_name": "Helion Energy",
+    "company_url": "https://www.helionenergy.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/helion"
+  },
+  {
+    "company_name": "Cognition",
+    "company_url": "https://cognition.ai",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/cognition"
+  },
+  {
+    "company_name": "Twelve",
+    "company_url": "https://www.twelve.co",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/twelve"
+  },
+  {
+    "company_name": "Beacon AI",
+    "company_url": "https://www.beaconai.co",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/beaconai"
+  },
+  {
+    "company_name": "Collaborative Robotics",
+    "company_url": "https://www.co.bot",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/cobot"
+  },
+  {
+    "company_name": "Astranis",
+    "company_url": "https://www.astranis.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/astranis/jobs"
+  },
+  {
+    "company_name": "Applied Intuition",
+    "company_url": "https://www.appliedintuition.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/appliedintuition/jobs"
+  },
+  {
+    "company_name": "Apex Space",
+    "company_url": "https://www.apexspace.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/apex-technology-inc"
+  },
+  {
+    "company_name": "Dusty Robotics",
+    "company_url": "https://www.dustyrobotics.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/dustyrobotics/jobs"
+  },
+  {
+    "company_name": "Gridware",
+    "company_url": "https://www.gridware.io",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/gridware"
+  },
+  {
+    "company_name": "Epsilon3",
+    "company_url": "https://www.epsilon3.io",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/epsilon3"
+  },
+  {
+    "company_name": "Exowatt",
+    "company_url": "https://www.exowatt.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/exowatt"
+  },
+  {
+    "company_name": "Chariot Defense",
+    "company_url": "https://www.chariotdefense.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/chariotdefense/jobs"
+  },
+  {
+    "company_name": "Conductor AI",
+    "company_url": "https://www.conductorai.co",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/conductorai"
+  },
+  {
+    "company_name": "Podium Automation",
+    "company_url": "https://www.podiumautomation.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/podium-automation"
+  },
+  {
+    "company_name": "Electric Air",
+    "company_url": "https://electricair.io",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/electricair"
+  },
+  {
+    "company_name": "Cosmic Robotics",
+    "company_url": "https://www.cosmicrobotics.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/cosmic-robotics"
+  },
+  {
+    "company_name": "Base Power",
+    "company_url": "https://www.basepowercompany.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/base-power"
+  },
+  {
+    "company_name": "Cerebras Systems",
+    "company_url": "https://www.cerebras.net",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/cerebrassystems/jobs"
+  },
+  {
+    "company_name": "Workrise",
+    "company_url": "https://www.workrise.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/rigup/jobs"
+  },
+  {
+    "company_name": "StarCloud",
+    "company_url": "https://starcloud.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/starcloud/jobs"
+  },
+  {
+    "company_name": "H3X",
+    "company_url": "https://www.h3x.tech",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/h3x-technologies"
+  },
+  {
+    "company_name": "Standard Bots",
+    "company_url": "https://standardbots.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/StandardBots"
+  },
+  {
+    "company_name": "Anthropic",
+    "company_url": "https://www.anthropic.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/anthropic/jobs"
+  },
+  {
+    "company_name": "Heron Power",
+    "company_url": "https://www.heronpower.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/heron-power"
+  },
+  {
+    "company_name": "Inversion",
+    "company_url": "https://inversionspace.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/inversionspace/jobs"
+  },
+  {
+    "company_name": "Turion Space",
+    "company_url": "https://turionspace.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/turion-space"
+  },
+  {
+    "company_name": "Physical Intelligence",
+    "company_url": "https://www.physicalintelligence.company",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/physicalintelligence"
+  },
+  {
+    "company_name": "Flexport",
+    "company_url": "https://www.flexport.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/flexport/jobs"
+  },
+  {
+    "company_name": "Saronic",
+    "company_url": "https://www.saronic.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/saronic"
+  },
+  {
+    "company_name": "AMP Robotics",
+    "company_url": "https://amprobotics.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/ampsortation/jobs"
+  },
+  {
+    "company_name": "Vulcan Elements",
+    "company_url": "https://vulcanelements.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/vulcanelements/jobs"
+  },
+  {
+    "company_name": "Commonwealth Fusion",
+    "company_url": "https://cfs.energy",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/cfsenergy"
+  },
+  {
+    "company_name": "True Anomaly",
+    "company_url": "https://trueanomaly.space",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/trueanomalyinc/jobs"
+  },
+  {
+    "company_name": "Impulse Labs",
+    "company_url": "https://www.impulselabs.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/impulse"
+  },
+  {
+    "company_name": "Orchard Robotics",
+    "company_url": "https://www.orchard-robotics.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/orchard"
+  },
+  {
+    "company_name": "Galvanick",
+    "company_url": "https://www.galvanick.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/galvanick"
+  },
+  {
+    "company_name": "Rangeview",
+    "company_url": "https://www.rangeview.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/rangeviewinc/jobs"
+  },
+  {
+    "company_name": "Atom Computing",
+    "company_url": "https://www.atom-computing.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/atomcomputing"
+  },
+  {
+    "company_name": "AnySignal",
+    "company_url": "https://www.anysignal.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/anysignal"
+  },
+  {
+    "company_name": "Ramp",
+    "company_url": "https://ramp.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/ramp"
+  },
+  {
+    "company_name": "NewLimit",
+    "company_url": "https://www.newlimit.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/newlimit/jobs"
+  },
+  {
+    "company_name": "Quindar",
+    "company_url": "https://www.quindar.space",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/quindar"
+  },
+  {
+    "company_name": "Replit",
+    "company_url": "https://replit.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/replit"
+  },
+  {
+    "company_name": "Gecko Robotics",
+    "company_url": "https://www.geckorobotics.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/gecko-robotics"
+  },
+  {
+    "company_name": "Kalshi",
+    "company_url": "https://www.kalshi.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/kalshi"
+  },
+  {
+    "company_name": "Fuse Energy",
+    "company_url": "https://www.f.energy",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/Fuse"
+  },
+  {
+    "company_name": "First Resonance",
+    "company_url": "https://www.firstresonance.io",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/first-resonance"
+  },
+  {
+    "company_name": "Epirus",
+    "company_url": "https://www.epirusinc.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/epirus/jobs"
+  },
+  {
+    "company_name": "Proxima Fusion",
+    "company_url": "https://www.proximafusion.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/proxima-fusion"
+  },
+  {
+    "company_name": "Traba",
+    "company_url": "https://www.traba.work",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/traba"
+  },
+  {
+    "company_name": "Charm Industrial",
+    "company_url": "https://charmindustrial.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/charmindustrial"
+  },
+  {
+    "company_name": "Last Energy",
+    "company_url": "https://www.lastenergy.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/last-energy"
+  },
+  {
+    "company_name": "Shift5",
+    "company_url": "https://www.shift5.io",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/shift5/jobs"
+  },
+  {
+    "company_name": "Arbor Energy",
+    "company_url": "https://www.arbor.co",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/arborenergy"
+  },
+  {
+    "company_name": "Glimpse",
+    "company_url": "https://www.glimp.se",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/glimp-se"
+  },
+  {
+    "company_name": "Burro",
+    "company_url": "https://www.burro.ai",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/Burro"
+  },
+  {
+    "company_name": "KoBold Metals",
+    "company_url": "https://www.koboldmetals.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/koboldmetals/jobs"
+  },
+  {
+    "company_name": "Overland AI",
+    "company_url": "https://www.overland.ai",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/overlandai/jobs"
+  },
+  {
+    "company_name": "Sardine",
+    "company_url": "https://www.sardine.ai",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/sardine"
+  },
+  {
+    "company_name": "Sierra",
+    "company_url": "https://sierra.ai",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/Sierra"
+  },
+  {
+    "company_name": "Tenstorrent",
+    "company_url": "https://tenstorrent.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/tenstorrent/jobs"
+  },
+  {
+    "company_name": "ICON",
+    "company_url": "https://www.iconbuild.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/iconcareers/jobs"
+  },
+  {
+    "company_name": "Agility Robotics",
+    "company_url": "https://www.agilityrobotics.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/agilityrobotics/jobs"
+  },
+  {
+    "company_name": "Viam",
+    "company_url": "https://www.viam.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/viamrobotics/jobs"
+  },
+  {
+    "company_name": "Vannevar Labs",
+    "company_url": "https://www.vannevarlabs.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/vannevarlabs/jobs"
+  },
+  {
+    "company_name": "Second Front Systems",
+    "company_url": "https://www.secondfront.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/Second-Front-Systems"
+  },
+  {
+    "company_name": "Seurat",
+    "company_url": "https://www.seurat.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/seurat/jobs"
+  },
+  {
+    "company_name": "Diligent Robotics",
+    "company_url": "https://www.diligentrobots.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/diligentrobotics/jobs"
+  },
+  {
+    "company_name": "WindBorne Systems",
+    "company_url": "https://windbornesystems.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/windborne-systems"
+  },
+  {
+    "company_name": "Muon Space",
+    "company_url": "https://muonspace.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/muonspace/jobs"
+  },
+  {
+    "company_name": "Dandelion Energy",
+    "company_url": "https://www.dandelionenergy.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/dandelion"
+  },
+  {
+    "company_name": "Cohere",
+    "company_url": "https://cohere.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/cohere"
+  },
+  {
+    "company_name": "Onebrief",
+    "company_url": "https://www.onebrief.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/onebrief"
+  },
+  {
+    "company_name": "Chef Robotics",
+    "company_url": "https://www.chefrobotics.ai",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/ChefRobotics"
+  },
+  {
+    "company_name": "TurbineOne",
+    "company_url": "https://www.turbineone.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/turbineone/jobs"
+  },
+  {
+    "company_name": "Texture Energy",
+    "company_url": "https://www.texturehq.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/texture"
+  },
+  {
+    "company_name": "Campus",
+    "company_url": "https://www.campus.edu",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/Campus"
+  },
+  {
+    "company_name": "Pacific Fusion",
+    "company_url": "https://www.pacificfusion.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/pacificfusion/jobs"
+  },
+  {
+    "company_name": "Heart Aerospace",
+    "company_url": "https://www.heartaerospace.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/heartaerospace/jobs"
+  },
+  {
+    "company_name": "Hebbia",
+    "company_url": "https://www.hebbia.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/hebbia/jobs"
+  },
+  {
+    "company_name": "Swan Technologies",
+    "company_url": "https://www.swan.tech",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/swan"
+  },
+  {
+    "company_name": "Whisper Aero",
+    "company_url": "https://whisper.aero",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/whisperaero/jobs"
+  },
+  {
+    "company_name": "Urban Sky",
+    "company_url": "https://www.urbansky.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/urbansky/jobs"
+  },
+  {
+    "company_name": "Molten Industries",
+    "company_url": "https://www.moltenindustries.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/moltenindustries"
+  },
+  {
+    "company_name": "Swift Solar",
+    "company_url": "https://www.swiftsolar.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/swiftsolar/jobs"
+  },
+  {
+    "company_name": "Elroy Air",
+    "company_url": "https://elroyair.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/elroyair"
+  },
+  {
+    "company_name": "Venus Aerospace",
+    "company_url": "https://venusaero.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/venusaero"
+  },
+  {
+    "company_name": "Aetherflux",
+    "company_url": "https://www.aetherflux.com",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/aetherflux"
+  },
+  {
+    "company_name": "Amperon",
+    "company_url": "https://www.amperon.co",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/amperon/jobs"
+  },
+  {
+    "company_name": "CruxOCM",
+    "company_url": "https://www.cruxocm.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/cruxocm"
+  },
+  {
+    "company_name": "Limbinal",
+    "company_url": "https://www.liminal.ai",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/liminalai/jobs"
+  },
+  {
+    "company_name": "Floodbase",
+    "company_url": "https://www.floodbase.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/floodbase/jobs"
+  },
+  {
+    "company_name": "Equilibrium Energy",
+    "company_url": "https://www.equilibriumenergy.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/equilibriumenergy/jobs"
   }
 ]
