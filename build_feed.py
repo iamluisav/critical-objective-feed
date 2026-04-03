@@ -321,7 +321,7 @@ def build_csv(jobs):
                 "Category name": job.get("department", "")
             })
 
-def build_xml(jobs):
+def build_xml(jobs, filename):
     root = ET.Element("jobs")
 
     for job in jobs:
@@ -331,39 +331,44 @@ def build_xml(jobs):
             el.text = str(value or "")
 
     tree = ET.ElementTree(root)
-    tree.write("feed.xml", encoding="utf-8", xml_declaration=True)
+    tree.write(filename, encoding="utf-8", xml_declaration=True)
 
 def main():
     with open("companies.json") as f:
         companies = json.load(f)
 
     conn = init_cache()
-    all_jobs = []
+    jobs_by_type = {"lever": [], "ashby": [], "greenhouse": []}
 
     try:
         for company in companies:
             try:
-                if company["source_type"] == "lever":
+                source = company["source_type"]
+                if source == "lever":
                     jobs = parse_lever(company)
-                elif company["source_type"] == "ashby":
+                elif source == "ashby":
                     jobs = parse_ashby(company)
-                elif company["source_type"] == "greenhouse":
+                elif source == "greenhouse":
                     jobs = parse_greenhouse(company, conn)
                 else:
-                    print(f"Skipping unsupported source_type: {company['source_type']}")
+                    print(f"Skipping unsupported source_type: {source}")
                     continue
 
                 print(f"{company['company_name']}: found {len(jobs)} jobs")
-                all_jobs.extend(jobs)
+                jobs_by_type[source].extend(jobs)
 
             except Exception as e:
                 print(f"Error processing {company['company_name']}: {type(e).__name__}: {e}")
     finally:
         conn.close()
 
-    build_xml(all_jobs)
+    for source, jobs in jobs_by_type.items():
+        build_xml(jobs, f"feed_{source}.xml")
+        print(f"Built feed_{source}.xml with {len(jobs)} jobs")
+
+    all_jobs = [j for jobs in jobs_by_type.values() for j in jobs]
     build_csv(all_jobs)
-    print(f"\nBuilt feed.xml and feed.csv with {len(all_jobs)} total jobs")
+    print(f"\nTotal: {len(all_jobs)} jobs across all feeds")
 
 if __name__ == "__main__":
     main()
