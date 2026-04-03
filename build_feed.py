@@ -3,46 +3,202 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 import xml.etree.ElementTree as ET
+from urllib.parse import urljoin
 
 def get_logo(url):
     try:
-        res = requests.get(url, timeout=5)
+        res = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
         soup = BeautifulSoup(res.text, "html.parser")
 
-        # Try og:image
         og = soup.find("meta", property="og:image")
         if og and og.get("content"):
-            return og["content"]
+            return urljoin(url, og["content"])
 
-        # Try logo-like image
         imgs = soup.find_all("img")
         for img in imgs:
-            src = img.get("src", "").lower()
-            if "logo" in src:
-                return src
+            src = img.get("src", "")
+            alt = (img.get("alt") or "").lower()
+            cls = " ".join(img.get("class", [])) if img.get("class") else ""
+            combined = f"{src} {alt} {cls}".lower()
+            if "logo" in combined:
+                return urljoin(url, src)
 
-        # Fallback to favicon
-        return url + "/favicon.ico"
+        icon = soup.find("link", rel=lambda x: x and "icon" in x.lower())
+        if icon and icon.get("href"):
+            return urljoin(url, icon["href"])
 
-    except:
+        return urljoin(url, "/favicon.ico")
+    except Exception:
         return ""
 
-def normalize_job(job, company):
-    return {
-        "job_id": job.get("id", ""),
-        "job_title": job.get("title", ""),
-        "description": job.get("description", ""),
-        "company_name": company["company_name"],
-        "company_url": company["company_url"],
-        "company_logo_url": get_logo(company["company_url"]),
-        "application_link": job.get("apply_url", ""),
-        "publish_date": datetime.now().strftime("%Y-%m-%d"),
-        "job_type": "fulltime",
-        "location": job.get("location", ""),
-        "location_type": "onsite",
-        "department": job.get("department", ""),
-        "job_url": job.get("url", "")
+def normalize_job_type(value):
+    if not value:
+        return "fulltime"
+    v = value.strip().lower()
+    mapping = {
+        "full-time": "fulltime",
+        "full time": "fulltime",
+        "fulltime": "fulltime",
+        "part-time": "parttime",
+        "part time": "parttime",
+        "parttime": "parttime",
+        "contract": "contract",
+        "contractor": "contract",
+        "intern": "internship",
+        "internship": "internship",
+        "temporary": "temporary",
+        "volunteer": "volunteer"
     }
+    return mapping.get(v, "fulltime")
+
+def normalize_location_type(workplace_type="", location_text=""):
+    text = f"{workplace_type or ''} {location_text or ''}".strip().lower()
+    if "hybrid" in text:
+        return "hybrid"
+    if "remote" in text:
+        return "remote"
+    return "onsite"
+
+def parse_lever(company):
+    jobs = []
+    res = requests.get(company["feed_url"], timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+    res.raise_for_status()
+
+    data = res.json()
+    logo_url = get_logo(company["company_url"])
+
+    for post in data:
+        categories = post.get("categories", {}) or {}
+
+        location = categories.get("location", "") or ""
+        commitment = categories.get("commitment", "") or ""
+        department = categories.get("team", "") or ""
+
+        description = post.get("descriptionPlain") or post.get("description") or ""
+        apply_url = post.get("applyUrl", "") or ""
+        job_url = post.get("hostedUrl", "") or ""
+
+        created_at = post.get("createdAt")
+        if created_at:
+            try:
+                published = datetime.fromtimestamp(created_at / 1000).strftime("%Y-%m-%d")
+            except Exception:
+                published = datetime.now().strftime("%Y-%m-%d")
+        else:
+            published = datetime.now().strftime("%Y-%m-%d")
+
+        jobs.append({
+            "job_id": post.get("id", ""),
+            "job_title": post.get("text", ""),
+            "description": description,
+            "company_name": company["company_name"],
+            "company_url": company["company_url"],
+            "company_logo_url": logo_url,
+            "application_link": apply_url,
+            "publish_date": published,
+            "job_type": normalize_job_type(commitment),
+            "location": location,
+            "location_type": normalize_location_type(location, location),
+            "department": department,
+            "job_url": job_url
+        })
+
+    return jobs
+
+def parse_ashby(company):
+    jobs = []
+    res = requests.get(company["feed_url"], timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+    res.raise_for_status()
+
+    root = ET.fromstring(res.content)
+    logo_url = get_logo(company["company_url"])
+
+    for job_el in root.findall("job"):
+        def get(tag):
+            el = job_el.find(tag)
+            return el.text.strip() if el is not None and el.text else ""
+
+        position = job_el.find("position")
+        title = position.find("title").text.strip() if position is not None and position.find("title") is not None else ""
+        description = position.find("description").text.strip() if position is not None and position.find("description") is not None else ""
+        location = ""
+        location_el = position.find("location") if position is not None else None
+        if location_el is not None:
+            def loc_name(tag):
+                el = location_el.find(tag)
+                if el is not None:
+                    name = el.find("name")
+                    return name.text.strip() if name is not None and name.text else ""
+                return ""
+            city = loc_name("city")
+            state = loc_name("state")
+            country = loc_name("country")
+            parts = [p for p in [city, state, country] if p]
+            location = ", ".join(parts)
+
+        workplace_type = get("workplaceType")
+        is_remote = get("isRemote").lower()
+
+        if workplace_type.lower() == "remote" or is_remote == "yes":
+            loc_type = "remote"
+        elif workplace_type.lower() == "hybrid":
+            loc_type = "hybrid"
+        else:
+            loc_type = "onsite"
+
+        jobs.append({
+            "job_id": get("jobId"),
+            "job_title": title,
+            "description": description,
+            "company_name": company["company_name"],
+            "company_url": company["company_url"],
+            "company_logo_url": logo_url,
+            "application_link": get("applicationUrl"),
+            "publish_date": datetime.now().strftime("%Y-%m-%d"),
+            "job_type": normalize_job_type(get("employmentType")),
+            "location": location,
+            "location_type": loc_type,
+            "department": get("department"),
+            "job_url": get("jobUrl")
+        })
+
+    return jobs
+
+def build_csv(jobs):
+    import csv
+    with open("feed.csv", "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=[
+            "Job title", "Job type", "Company name", "Company URL", "Company logo",
+            "Job location", "Office location", "Location limits", "Description",
+            "Apply URL", "Apply email", "Salary min", "Salary maximum",
+            "Salary currency", "Salary schedule", "Highlighted", "Sticky",
+            "Post length", "Post state", "Date posted", "Category name"
+        ])
+        writer.writeheader()
+        for job in jobs:
+            writer.writerow({
+                "Job title": job.get("job_title", ""),
+                "Job type": job.get("job_type", "fulltime"),
+                "Company name": job.get("company_name", ""),
+                "Company URL": job.get("company_url", ""),
+                "Company logo": job.get("company_logo_url", ""),
+                "Job location": job.get("location_type", "onsite"),
+                "Office location": job.get("location", ""),
+                "Location limits": "",
+                "Description": job.get("description", ""),
+                "Apply URL": job.get("application_link", ""),
+                "Apply email": "",
+                "Salary min": "",
+                "Salary maximum": "",
+                "Salary currency": "",
+                "Salary schedule": "",
+                "Highlighted": "false",
+                "Sticky": "false",
+                "Post length": "30",
+                "Post state": "published",
+                "Date posted": job.get("publish_date", ""),
+                "Category name": job.get("department", "")
+            })
 
 def build_xml(jobs):
     root = ET.Element("jobs")
@@ -51,7 +207,7 @@ def build_xml(jobs):
         job_el = ET.SubElement(root, "job")
         for key, value in job.items():
             el = ET.SubElement(job_el, key)
-            el.text = value
+            el.text = str(value or "")
 
     tree = ET.ElementTree(root)
     tree.write("feed.xml", encoding="utf-8", xml_declaration=True)
@@ -64,26 +220,23 @@ def main():
 
     for company in companies:
         try:
-            res = requests.get(company["feed_url"])
-            data = res.text
+            if company["source_type"] == "lever":
+                jobs = parse_lever(company)
+            elif company["source_type"] == "ashby":
+                jobs = parse_ashby(company)
+            else:
+                print(f"Skipping unsupported source_type: {company['source_type']}")
+                continue
 
-            # TEMP placeholder — we’ll improve parsing next
-            fake_job = {
-                "id": company["company_name"],
-                "title": "Sample Role",
-                "description": "Placeholder until parsing is added",
-                "apply_url": company["company_url"],
-                "location": "Remote",
-                "department": "",
-                "url": company["company_url"]
-            }
-
-            all_jobs.append(normalize_job(fake_job, company))
+            print(f"{company['company_name']}: found {len(jobs)} jobs")
+            all_jobs.extend(jobs)
 
         except Exception as e:
-            print("Error:", e)
+            print(f"Error processing {company['company_name']}: {e}")
 
     build_xml(all_jobs)
+    build_csv(all_jobs)
+    print(f"\nBuilt feed.xml and feed.csv with {len(all_jobs)} total jobs")
 
 if __name__ == "__main__":
     main()
