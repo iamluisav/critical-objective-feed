@@ -6,6 +6,24 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import xml.etree.ElementTree as ET
 from urllib.parse import urljoin
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+def make_session():
+    session = requests.Session()
+    retry = Retry(
+        total=3,
+        backoff_factor=2,       # waits 2s, 4s, 8s between retries
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET"]
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    session.headers.update({"User-Agent": "Mozilla/5.0"})
+    return session
+
+SESSION = make_session()
 
 DB_PATH = "description_cache.db"
 
@@ -38,7 +56,7 @@ def fetch_greenhouse_description(conn, slug, job_id):
         return cached
     try:
         url = f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs/{job_id}"
-        res = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+        res = SESSION.get(url, timeout=20)
         res.raise_for_status()
         data = res.json()
         description = data.get("content", "") or ""
@@ -54,7 +72,7 @@ def fetch_greenhouse_description(conn, slug, job_id):
 
 def get_logo(url):
     try:
-        res = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+        res = SESSION.get(url, timeout=10)
         soup = BeautifulSoup(res.text, "html.parser")
 
         og = soup.find("meta", property="og:image")
@@ -108,7 +126,7 @@ def normalize_location_type(workplace_type="", location_text=""):
 
 def parse_lever(company):
     jobs = []
-    res = requests.get(company["feed_url"], timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+    res = SESSION.get(company["feed_url"], timeout=20)
     res.raise_for_status()
 
     data = res.json()
@@ -154,7 +172,7 @@ def parse_lever(company):
 
 def parse_ashby(company):
     jobs = []
-    res = requests.get(company["feed_url"], timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+    res = SESSION.get(company["feed_url"], timeout=20)
     res.raise_for_status()
 
     root = ET.fromstring(res.content)
@@ -215,7 +233,7 @@ def parse_ashby(company):
 
 def parse_greenhouse(company, conn):
     jobs = []
-    res = requests.get(company["feed_url"], timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+    res = SESSION.get(company["feed_url"], timeout=20)
     res.raise_for_status()
 
     data = res.json()

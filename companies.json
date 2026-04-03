@@ -1,5 +1,11 @@
 [
   {
+    "company_name": "Anduril",
+    "company_url": "https://www.anduril.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/andurilindustries/jobs"
+  },
+  {
     "company_name": "Hadrian",
     "company_url": "https://www.hadrian.co",
     "source_type": "ashby",
@@ -712,5 +718,65 @@
     "company_url": "https://www.equilibriumenergy.com",
     "source_type": "greenhouse",
     "feed_url": "https://boards-api.greenhouse.io/v1/boards/equilibriumenergy/jobs"
+  },
+  {
+    "company_name": "Ginkgo Bioworks",
+    "company_url": "https://www.ginkgobioworks.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/ginkgobioworks/jobs"
+  },
+  {
+    "company_name": "Luminar Technologies",
+    "company_url": "https://www.luminartech.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/luminar/jobs"
+  },
+  {
+    "company_name": "Velo3D",
+    "company_url": "https://www.velo3d.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/velo3d"
+  },
+  {
+    "company_name": "CesiumAstro",
+    "company_url": "https://www.cesiumastro.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/CesiumAstro"
+  },
+  {
+    "company_name": "Echodyne",
+    "company_url": "https://www.echodyne.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/echodynecorp/jobs"
+  },
+  {
+    "company_name": "Rigetti Computing",
+    "company_url": "https://www.rigetti.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/rigetti"
+  },
+  {
+    "company_name": "Xage Security",
+    "company_url": "https://www.xage.com",
+    "source_type": "lever",
+    "feed_url": "https://api.lever.co/v0/postings/xage-security"
+  },
+  {
+    "company_name": "Primer AI",
+    "company_url": "https://www.primer.ai",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/primerai/jobs"
+  },
+  {
+    "company_name": "Capella Space",
+    "company_url": "https://www.capellaspace.com",
+    "source_type": "greenhouse",
+    "feed_url": "https://boards-api.greenhouse.io/v1/boards/capellaspace/jobs"
+  },
+  {
+    "company_name": "Osmo",
+    "company_url": "https://www.osmo.ai",
+    "source_type": "ashby",
+    "feed_url": "https://app.ashbyhq.com/api/xml-feed/job-postings/organization/osmo"
   }
 ]
