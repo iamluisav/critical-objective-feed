@@ -1,0 +1,41 @@
+name: Build Job Feed
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # Daily at 6am UTC (2am ET)
+  workflow_dispatch:        # Allow manual trigger from GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore description cache
+        uses: actions/cache@v4
+        with:
+          path: description_cache.db
+          key: description-cache-${{ hashFiles('companies.json') }}
+          restore-keys: |
+            description-cache-
+
+      - name: Build feed
+        run: python build_feed.py
+
+      - name: Commit and push updated feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feed.xml feed.csv
+          git diff --cached --quiet || git commit -m "chore: daily feed refresh [skip ci]"
+          git push
