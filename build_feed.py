@@ -1,9 +1,56 @@
 import json
 import requests
+import sqlite3
+import time
 from bs4 import BeautifulSoup
 from datetime import datetime
 import xml.etree.ElementTree as ET
 from urllib.parse import urljoin
+
+DB_PATH = "description_cache.db"
+
+def init_cache():
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS descriptions (
+            job_id TEXT PRIMARY KEY,
+            description TEXT,
+            fetched_at TEXT
+        )
+    """)
+    conn.commit()
+    return conn
+
+def get_cached_description(conn, job_id):
+    row = conn.execute("SELECT description FROM descriptions WHERE job_id = ?", (job_id,)).fetchone()
+    return row[0] if row else None
+
+def set_cached_description(conn, job_id, description):
+    conn.execute(
+        "INSERT OR REPLACE INTO descriptions (job_id, description, fetched_at) VALUES (?, ?, ?)",
+        (job_id, description, datetime.now().isoformat())
+    )
+    conn.commit()
+
+def fetch_greenhouse_description(conn, slug, job_id):
+    cached = get_cached_description(conn, f"greenhouse:{job_id}")
+    if cached is not None:
+        return cached
+    try:
+        url = f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs/{job_id}"
+        res = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+        res.raise_for_status()
+        data = res.json()
+        description = data.get("content", "") or ""
+        # Strip HTML tags
+        if description:
+            soup = BeautifulSoup(description, "html.parser")
+            description = soup.get_text(separator="\n").strip()
+        set_cached_description(conn, f"greenhouse:{job_id}", description)
+        time.sleep(0.1)
+        return description
+    except Exception:
+        return ""
 
 def get_logo(url):
     try:
@@ -98,7 +145,7 @@ def parse_lever(company):
             "publish_date": published,
             "job_type": normalize_job_type(commitment),
             "location": location,
-            "location_type": normalize_location_type(location, location),
+            "location_type": normalize_location_type(commitment, location),
             "department": department,
             "job_url": job_url
         })
@@ -119,8 +166,10 @@ def parse_ashby(company):
             return el.text.strip() if el is not None and el.text else ""
 
         position = job_el.find("position")
-        title = position.find("title").text.strip() if position is not None and position.find("title") is not None else ""
-        description = position.find("description").text.strip() if position is not None and position.find("description") is not None else ""
+        def safe_text(el):
+            return (el.text or "").strip() if el is not None else ""
+        title = safe_text(position.find("title")) if position is not None else ""
+        description = safe_text(position.find("description")) if position is not None else ""
         location = ""
         location_el = position.find("location") if position is not None else None
         if location_el is not None:
@@ -164,7 +213,7 @@ def parse_ashby(company):
 
     return jobs
 
-def parse_greenhouse(company):
+def parse_greenhouse(company, conn):
     jobs = []
     res = requests.get(company["feed_url"], timeout=15, headers={"User-Agent": "Mozilla/5.0"})
     res.raise_for_status()
@@ -172,7 +221,15 @@ def parse_greenhouse(company):
     data = res.json()
     logo_url = get_logo(company["company_url"])
 
-    for post in data.get("jobs", []):
+    # Extract slug from feed_url: https://boards-api.greenhouse.io/v1/boards/{slug}/jobs
+    feed_url = company["feed_url"]
+    slug = feed_url.rstrip("/").split("/boards/")[-1].split("/")[0]
+
+    total = len(data.get("jobs", []))
+    print(f"  Fetching descriptions for {total} Greenhouse jobs...", flush=True)
+
+    for i, post in enumerate(data.get("jobs", []), 1):
+        job_id = str(post.get("id", ""))
         location = post.get("location", {}).get("name", "") or ""
 
         metadata = {m["name"]: m["value"] for m in post.get("metadata", []) or []}
@@ -187,10 +244,15 @@ def parse_greenhouse(company):
 
         apply_url = post.get("absolute_url", "")
 
+        description = fetch_greenhouse_description(conn, slug, job_id)
+
+        if i % 20 == 0:
+            print(f"  ... {i}/{total}", flush=True)
+
         jobs.append({
-            "job_id": str(post.get("id", "")),
+            "job_id": job_id,
             "job_title": post.get("title", ""),
-            "description": "",
+            "description": description,
             "company_name": company["company_name"],
             "company_url": company["company_url"],
             "company_logo_url": logo_url,
@@ -257,25 +319,29 @@ def main():
     with open("companies.json") as f:
         companies = json.load(f)
 
+    conn = init_cache()
     all_jobs = []
 
-    for company in companies:
-        try:
-            if company["source_type"] == "lever":
-                jobs = parse_lever(company)
-            elif company["source_type"] == "ashby":
-                jobs = parse_ashby(company)
-            elif company["source_type"] == "greenhouse":
-                jobs = parse_greenhouse(company)
-            else:
-                print(f"Skipping unsupported source_type: {company['source_type']}")
-                continue
+    try:
+        for company in companies:
+            try:
+                if company["source_type"] == "lever":
+                    jobs = parse_lever(company)
+                elif company["source_type"] == "ashby":
+                    jobs = parse_ashby(company)
+                elif company["source_type"] == "greenhouse":
+                    jobs = parse_greenhouse(company, conn)
+                else:
+                    print(f"Skipping unsupported source_type: {company['source_type']}")
+                    continue
 
-            print(f"{company['company_name']}: found {len(jobs)} jobs")
-            all_jobs.extend(jobs)
+                print(f"{company['company_name']}: found {len(jobs)} jobs")
+                all_jobs.extend(jobs)
 
-        except Exception as e:
-            print(f"Error processing {company['company_name']}: {e}")
+            except Exception as e:
+                print(f"Error processing {company['company_name']}: {type(e).__name__}: {e}")
+    finally:
+        conn.close()
 
     build_xml(all_jobs)
     build_csv(all_jobs)
