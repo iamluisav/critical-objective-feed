@@ -9,6 +9,6 @@
     "company_name": "Shield AI",
     "company_url": "https://shield.ai",
     "source_type": "lever",
-    "feed_url": "https://api.lever.co/v0/postings/shieldai?mode=xml"
+    "feed_url": "https://api.lever.co/v0/postings/shieldai"
   }
 ]
